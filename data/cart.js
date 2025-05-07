@@ -36,4 +36,9 @@ export const cart = [{
     quantitySelector.value = 1;
   }
 
-    
+  export function removeFromCart(productId) {
+    const cartItemIndex = cart.findIndex((item) => item.productId === productId);
+    if (cartItemIndex !== -1) {
+      cart.splice(cartItemIndex, 1);
+    }
+  }  
