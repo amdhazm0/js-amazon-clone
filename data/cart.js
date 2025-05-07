@@ -1,13 +1,19 @@
-const cart = [];
+export const cart = [{
+    productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+    quantity: 1,
+},{
+    productId: '83d4ca15-0f35-48f5-b7a3-1ea210004f2e',
+    quantity: 2,
+}];
 
-export function updateCartQuantity() {
-    let cartQuantity = 0;
+
+  export function getCartQuantity() {
+    let totalQuantity = 0;
     cart.forEach((item) => {
-      cartQuantity += Number(item.quantity);
+      totalQuantity += item.quantity;
     });
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+    return totalQuantity;
   }
-  
   export function addToCart(productId) {
     const quantitySelector = document.querySelector(
       `.js-quantity-selector-${productId}`
@@ -29,3 +35,5 @@ export function updateCartQuantity() {
     }
     quantitySelector.value = 1;
   }
+
+    
