@@ -1,9 +1,9 @@
 console.log("Amazon script loaded successfully");
 
-let productsHtml = '';
+let productsHtml = "";
 
 products.forEach((product) => {
-    productsHtml += `
+  productsHtml += `
     <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -16,7 +16,7 @@ products.forEach((product) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars *10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
               ${product.rating.reviews} reviews
             </div>
@@ -48,10 +48,33 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${
+            product.id
+          }">
             Add to Cart
           </button>
         </div>`;
 });
 
-document.querySelector('.js-products-grid').innerHTML = productsHtml;
+document.querySelector(".js-products-grid").innerHTML = productsHtml;
+
+document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+    let matchingItem = null;
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+    if (matchingItem) {
+      matchingItem.quantity += 1;
+    } else {
+      cart.push({
+        productId: productId,
+        quantity: 1,
+      });
+    }
+    console.log(cart);
+  });
+});
