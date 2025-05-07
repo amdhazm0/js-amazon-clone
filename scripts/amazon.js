@@ -1,3 +1,6 @@
+import {cart} from "../data/cart.js";
+import {products} from "../data/products.js"; 
+
 console.log("Amazon script loaded successfully");
 
 let productsHtml = "";
@@ -60,7 +63,7 @@ document.querySelector(".js-products-grid").innerHTML = productsHtml;
 let timeout = 0;
 document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
   button.addEventListener("click", () => {
-    timeout +=2000;
+    timeout =2000;
     const productId = button.dataset.productId;
     const quantitySelector = document.querySelector(
         `.js-quantity-selector-${productId}`
