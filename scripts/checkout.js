@@ -3,6 +3,7 @@ import {products} from "../data/products.js";
 
 
 let cartSummaryHtml = ``;
+function renderCartSummary() {
 cart.forEach((cartItem) => {
     const productId = cartItem.productId;
     let product ;
@@ -35,7 +36,7 @@ cart.forEach((cartItem) => {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span data-product-id="${product.id}" class="delete-quantity-link link-primary js-delete-link">
                     Delete
                   </span>
                 </div>
@@ -90,5 +91,21 @@ cart.forEach((cartItem) => {
     `;
     
 });
-console.log(cartSummaryHtml);
+}
+renderCartSummary();
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHtml;
+document.querySelectorAll('.js-delete-link').forEach((deleteLink) => {
+    deleteLink.addEventListener('click', (event) => {
+        const productId = deleteLink.dataset.productId;
+        cart.forEach((item, index) => {
+            if (item.productId === productId) {
+                cart.splice(index, 1);
+                
+                console.log("Cart after deletion: ", cart);
+                
+            }
+        });
+        renderCartSummary();
+    })
+;
+});
