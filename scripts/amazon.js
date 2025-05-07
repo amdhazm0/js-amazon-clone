@@ -1,7 +1,6 @@
-import {cart} from "../data/cart.js";
-import {products} from "../data/products.js"; 
+import { addToCart,updateCartQuantity } from "../data/cart.js";
+import { products } from "../data/products.js";
 
-console.log("Amazon script loaded successfully");
 
 let productsHtml = "";
 
@@ -60,42 +59,27 @@ products.forEach((product) => {
 });
 
 document.querySelector(".js-products-grid").innerHTML = productsHtml;
-let timeout = 0;
+
+
+
+function showAddedToCart(productId) {
+  const addedToCart = document.querySelector(`.js-added-to-cart-${productId}`);
+  addedToCart.classList.add("added-to-cart-visible");
+  if (addedToCart.timeoutId) {
+    clearTimeout(addedToCart.timeoutId);
+  }
+  addedToCart.timeoutId = setTimeout(() => {
+    addedToCart.classList.remove("added-to-cart-visible");
+    addedToCart.timeoutId = null;
+  }, 2000);
+}
+
+
 document.querySelectorAll(".js-add-to-cart-button").forEach((button) => {
   button.addEventListener("click", () => {
-    timeout =2000;
     const productId = button.dataset.productId;
-    const quantitySelector = document.querySelector(
-        `.js-quantity-selector-${productId}`
-    );
-    let matchingItem = null;
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-    if (matchingItem) {
-      matchingItem.quantity += Number(quantitySelector.value);
-    } else {
-        
-      cart.push({
-        productId: productId,
-        quantity: Number(quantitySelector.value),
-      });
-    }
-    let cartQuantity = 0;
-    cart.forEach((item) => {
-      cartQuantity += Number(item.quantity);
-    });
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-    quantitySelector.value = 1;
-    const addedToCart = document.querySelector(
-        `.js-added-to-cart-${productId}`
-    );
-    addedToCart.classList.add("added-to-cart-visible");
-    setTimeout(() => {
-        addedToCart.classList.remove("added-to-cart-visible");
-    }, timeout);
-    
+    addToCart(productId);
+    updateCartQuantity();
+    showAddedToCart(productId);
   });
 });
