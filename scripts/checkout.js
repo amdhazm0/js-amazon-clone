@@ -2,6 +2,15 @@ import {cart ,removeFromCart ,getCartQuantity } from "../data/cart.js";
 import {products} from "../data/products.js";
 
 
+
+function updateLableCount() {
+const cartQuantity = getCartQuantity();
+const cartQuantityElement = document.querySelector(".js-return-to-home-link");
+cartQuantityElement.innerHTML = `${cartQuantity} Items`;
+}
+
+updateLableCount();
+
 let cartSummaryHtml = ``;
 function renderCartSummary() {
 cart.forEach((cartItem) => {
@@ -98,8 +107,8 @@ document.querySelectorAll('.js-delete-link').forEach((deleteLink) => {
     deleteLink.addEventListener('click', (event) => {
         const productId = deleteLink.dataset.productId;
             removeFromCart(productId);
+            updateLableCount();
             const container = document.querySelector(`.js-cart-item-container-${productId}`);
             container.remove();
         });
-    renderCartSummary();
 });

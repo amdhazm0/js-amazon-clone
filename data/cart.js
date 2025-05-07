@@ -13,7 +13,7 @@ export function saveCartToLocalStorage() {
     });
     return totalQuantity;
   }
-  
+
   export function addToCart(productId) {
     const quantitySelector = document.querySelector(
       `.js-quantity-selector-${productId}`
@@ -43,4 +43,5 @@ export function saveCartToLocalStorage() {
       cart.splice(cartItemIndex, 1);
     }
     saveCartToLocalStorage();
+    
   }  
