@@ -4,6 +4,8 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions } from "../data/deliveryOptions.js";
 
 
+function renderOrderSummary() {
+
 function updateLableCount() {
 const cartQuantity = getCartQuantity();
 const cartQuantityElement = document.querySelector(".js-return-to-home-link");
@@ -130,21 +132,8 @@ document.querySelectorAll('.js-delivery-option').forEach((element)=>{
     const productId = element.dataset.productId;
     const deliveryOptionId = element.dataset.deliveryOptionId;
     updateDeliveryOption(productId, deliveryOptionId);
-    
-    const container = document.querySelector(`.js-cart-item-container-${productId}`);
-    const deliveryDateElement = container.querySelector('.delivery-date');
-    
-    let selectedDeliveryOption;
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        selectedDeliveryOption = option;
-      }
-    });
-    
-    const today = dayjs();
-    const deliveryDate = today.add(selectedDeliveryOption.deliveryDays, 'days');
-    const dateString = deliveryDate.format('dddd, MMMM D');
-    
-    deliveryDateElement.innerHTML = `Delivery date: ${dateString}`;
+    renderOrderSummary();
   });
-});
+})
+}//renderOrderSummary
+renderOrderSummary();
