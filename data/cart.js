@@ -54,3 +54,14 @@ export function saveCartToLocalStorage() {
     saveCartToLocalStorage();
     
   }  
+
+  export function updateDeliveryOption(productId, deliveryOptionId) {
+    let matchingItem = null;
+    cart.forEach((item) => {
+      if (productId === item.productId) {
+        matchingItem = item;
+      }
+    });
+    matchingItem.deliveryOptionId = deliveryOptionId;
+    saveCartToLocalStorage();
+  }
