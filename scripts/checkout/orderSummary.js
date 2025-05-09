@@ -119,6 +119,7 @@ document.querySelectorAll('.js-delete-link').forEach((deleteLink) => {
             updateLableCount();
             const container = document.querySelector(`.js-cart-item-container-${productId}`);
             container.remove();
+            renderPaymentSummary();
         });
 });
 
