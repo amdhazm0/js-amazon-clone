@@ -1,16 +1,15 @@
 class Cart {
     cartItems= undefined;
-    localstorageKey = undefined;
+    #localstorageKey = undefined;
 
     constructor(localstorageKey) {
-        this.localstorageKey = localstorageKey;
-        this.loadFromStorage();
-        console.log('this is Cart Class');
+        this.#localstorageKey = localstorageKey;
+        this.#loadFromStorage();
     }
 
-    loadFromStorage() {
-        this.cartItems = localStorage.getItem(this.localstorageKey)
-            ? JSON.parse(localStorage.getItem(this.localstorageKey))
+    #loadFromStorage() {
+        this.cartItems = localStorage.getItem(this.#localstorageKey)
+            ? JSON.parse(localStorage.getItem(this.#localstorageKey))
             : [{
                 productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
                 quantity: 2,
@@ -23,7 +22,7 @@ class Cart {
     }
 
     saveCartToLocalStorage() {
-        localStorage.setItem(this.localstorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localstorageKey, JSON.stringify(this.cartItems));
       }
 
     getCartQuantity() {
@@ -86,15 +85,7 @@ const myCart = new Cart('cart-oop');
 const myCart2 = new Cart('cart2-oop');
 console.log(myCart);
 console.log(myCart2);
-console.log('myCart quantity');
-console.log(myCart.getCartQuantity());
-console.log('myCart after removeFromCart');
-myCart.removeFromCart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6');
-console.log(myCart.getCartQuantity());
-console.log('myCart2 quantity');
-console.log(myCart2.getCartQuantity());
-
-
+console.log(myCart.localstorageKey);
 
 
   
