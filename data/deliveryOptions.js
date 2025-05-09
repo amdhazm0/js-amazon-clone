@@ -16,3 +16,7 @@ export const deliveryOptions = [
     },
 ];
 
+export function getDeliveryOptionById(id) {
+    return deliveryOptions.find(option => option.id === id) 
+    || deliveryOptions[0];
+}
