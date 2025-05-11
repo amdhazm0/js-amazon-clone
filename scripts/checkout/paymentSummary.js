@@ -3,7 +3,6 @@ import { getProductById } from "../../data/products.js";
 import { getDeliveryOptionById } from "../../data/deliveryOptions.js";
 
 export function renderPaymentSummary() {
-    console.log('renderPaymentSummary');
     let totalOrderCents = 0;
     let shippingCents = 0;
     cart.forEach((cartItem) => {
@@ -14,8 +13,6 @@ export function renderPaymentSummary() {
         const deliveryOption = getDeliveryOptionById(deliveryOptionId);
         shippingCents += deliveryOption.priceCents;
     });
-    console.log(totalOrderCents);
-    console.log(shippingCents);
     const totalBeforeTaxCents = totalOrderCents + shippingCents;
     const taxCents = totalBeforeTaxCents * 0.1;
     const totalCents = totalBeforeTaxCents + taxCents;

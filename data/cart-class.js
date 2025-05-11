@@ -81,14 +81,6 @@ class Cart {
 
 
 
-const myCart = new Cart('cart-oop');
-const myCart2 = new Cart('cart2-oop');
-console.log(myCart);
-console.log(myCart2);
-console.log(myCart.localstorageKey);
-
-
-  
 
   
 
