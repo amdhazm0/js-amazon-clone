@@ -56,6 +56,25 @@ class Clothing extends Product {
 
 export let products = [];
 
+
+export function fetchProducts(){
+  const startTime = Date.now();
+  const promise = fetch("https://supersimplebackend.dev/products")
+  .then((response)=>{
+    return response.json();
+  }).then((data)=>{
+    products = data.map((product) => {
+      if (product.type === "clothing") {
+        return new Clothing(product);
+      }
+      return new Product(product);
+    });
+    const endTime = Date.now();
+    console.log('products loaded in', endTime - startTime, 'ms');
+  });
+  return promise;
+}
+/*
 export function loadProducts(fun) {
   const startTime = Date.now();
   const xhr = new XMLHttpRequest();
@@ -73,6 +92,8 @@ export function loadProducts(fun) {
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();
 }
+*/
+
 /*
 export const products = [
   {
