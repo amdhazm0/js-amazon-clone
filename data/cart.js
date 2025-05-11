@@ -65,3 +65,21 @@ export function saveCartToLocalStorage() {
     matchingItem.deliveryOptionId = deliveryOptionId;
     saveCartToLocalStorage();
   }
+
+  export function loadCart(fun) {
+    const startTime = Date.now();
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", () => {
+      products = JSON.parse(xhr.responseText).map((product) => {
+        if (product.type === "clothing") {
+          return new Clothing(product);
+        }
+        return new Product(product);
+      });
+      const endTime = Date.now();
+      console.log('products loaded in', endTime - startTime, 'ms');
+      fun();
+    });
+    xhr.open("GET", "https://supersimplebackend.dev/cart");
+    xhr.send();
+  }
