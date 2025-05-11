@@ -1,6 +1,59 @@
+
+
+/**
+ * @typedef {Object} Product
+ * @property {string} id
+ * @property {string} image
+ * @property {string} name
+ * @property {Object} rating
+ * @property {number} priceCents
+ */
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  constructor(productDetails) {
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+    
+  }
+
+  /**
+   * @returns {string}
+   */
+  getStarUrl() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+  getPriceDollars() {
+    return (this.priceCents / 100).toFixed(2);
+  }
+}
+
+/**
+ * @param {string} productId
+ * @returns {Product}
+ */
 export function getProductById(productId) {
   return products.find((product) => product.id === productId);
 }
+
+/**
+ * @extends {Product}
+ */
+class Clothing extends Product {
+  sizeChartLink;
+
+  constructor(productDetails) {
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+}
+
 
 export const products = [
   {
@@ -661,4 +714,31 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((product) => {
+  if (product.type === "clothing") {
+    return new Clothing(product);
+  }
+  return new Product(product);
+});
+
+const tshirt = new Clothing(
+  {
+    id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+    image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+    name: "Adults Plain Cotton T-Shirt - 2 Pack",
+    rating: {
+      stars: 4.5,
+      count: 56
+    },
+    priceCents: 799,
+    keywords: [
+      "tshirts",
+      "apparel",
+      "mens"
+    ],
+    type: "clothing",
+    sizeChartLink: "images/clothing-size-chart.png"
+  }
+);
+
+console.log(tshirt);
