@@ -4,7 +4,12 @@ import { fetchProducts } from "../data/products.js";
 
 
 async function loadPage(){
-    await fetchProducts();
+    try{
+        await fetchProducts();
+    }catch(e){
+        console.log("error loading products", e);
+    }
+    
     renderOrderSummary();
     renderPaymentSummary();
 }
