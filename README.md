@@ -118,5 +118,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Ahmed Hazem - [@yourLinkedin](https://www.linkedin.com/in/ahmed-hazem-727b52272/)
+Ahmed Hazem - [@Linkedin](https://www.linkedin.com/in/ahmed-hazem-727b52272/)
 Project Link: [https://github.com/amdhazm0/js-amazon-clone](https://github.com/amdhazm0/js-amazon-clone) 
